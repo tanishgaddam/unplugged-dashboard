@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --color-background: #050A07;
+  --color-foreground: #FFFFFF;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #050A07;
+  color: #FFFFFF;
+  font-family: var(--font-sans), sans-serif;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), serif;
+  letter-spacing: -0.01em;
+}
+
+.glass-panel {
+  background-color: rgba(74, 93, 77, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(74, 93, 77, 0.4);
+  border-radius: 1.5rem;
+}
+
+.safari-button {
+  background-color: #FFB800;
+  color: #050A07;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.5rem 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.safari-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 184, 0, 0.4);
+}
+
+.safari-button-secondary {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 184, 0, 0.4);
+  border-radius: 9999px;
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.safari-button-secondary:hover {
+  background-color: rgba(255, 184, 0, 0.15);
+}
+
+.text-gold {
+  color: #FFB800;
+}
+
+::selection {
+  background: rgba(255, 184, 0, 0.3);
+  color: #FFFFFF;
+}
+
+@keyframes pulse-soft {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s infinite ease-in-out;
+}
