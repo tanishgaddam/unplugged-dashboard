@@ -31,9 +31,8 @@ export default function DashboardClient({ mode }: { mode: string }) {
 
   const fetchState = async () => {
     try {
-      const response = await fetch("/api/state");
-      const data = (await response.json()) as SafariState;
-      setState(data);
+      const { getDemoState } = await import("@/lib/demo-store");
+      setState(getDemoState());
     } catch (err) {
       setError("Failed to sync with safari field.");
     }
@@ -48,11 +47,8 @@ export default function DashboardClient({ mode }: { mode: string }) {
   const simulate = async (action: "tick" | "reset") => {
     setSimMessage(action === "tick" ? "Advancing simulation..." : "Resetting demo...");
     try {
-      const response = await fetch("/api/simulate", {
-        method: "POST",
-        body: JSON.stringify({ action }),
-      });
-      const data = (await response.json()) as SafariState;
+      const { advanceSimulation, resetDemoState } = await import("@/lib/demo-store");
+      const data = action === "tick" ? advanceSimulation() : resetDemoState();
       setState(data);
       setSimMessage(action === "tick" ? "" : "System reset complete.");
       if (action === "reset") setTimeout(() => setSimMessage(""), 3000);

@@ -1,5 +1,3 @@
-import fs from "fs";
-import path from "path";
 import {
   Booking,
   SafariSlot,
@@ -13,35 +11,11 @@ import {
   TelemetryEvent,
 } from "@/lib/types";
 
-// Persistence configuration
-const STATE_FILE = path.join(process.cwd(), "tmp", "safari-state.json");
-
-function ensureDirectory() {
-  const dir = path.dirname(STATE_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-}
-
 function saveState(state: SafariState) {
-  ensureDirectory();
-  try {
-    fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
-  } catch (e) {
-    console.error("Failed to save state:", e);
-  }
+  // Static export mode: in-memory only
 }
 
 function loadState(): SafariState | null {
-  if (fs.existsSync(STATE_FILE)) {
-    try {
-      const data = fs.readFileSync(STATE_FILE, "utf-8");
-      return JSON.parse(data) as SafariState;
-    } catch (e) {
-      console.error("Failed to load state:", e);
-      return null;
-    }
-  }
   return null;
 }
 
@@ -347,9 +321,6 @@ export function getDemoState() {
 }
 
 export function resetDemoState() {
-  // Clear persistent file
-  if (fs.existsSync(STATE_FILE)) fs.unlinkSync(STATE_FILE);
-  
   const newState = initialState();
   (globalThis as any).demoState = newState;
   demoState = newState;

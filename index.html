@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unplugged Dashboard - Github Pages Deployment</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: #222;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        h1 { color: #facc15; }
+        code {
+            background: #333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #a855f7;
+            font-size: 1.1em;
+        }
+        ul {
+            text-align: left;
+            margin-top: 20px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deploying Next.js to GitHub Pages</h1>
+        <p>This repository contains the source code for a Next.js application.</p>
+        <p>To deploy this application to GitHub Pages, follow these steps:</p>
+        <ul>
+            <li>Run the deployment script: <br><code>npm run deploy</code></li>
+            <li>This script automatically builds the static application into the <code>out/</code> folder and pushes it to the <code>gh-pages</code> branch.</li>
+            <li>Go to your repository settings on GitHub: <strong>Settings &gt; Pages</strong>.</li>
+            <li>Under "Build and deployment", set the source to <strong>Deploy from a branch</strong>.</li>
+            <li>Check the branch selection and set it to <strong>gh-pages</strong> and the folder to <strong>/(root)</strong>, then save.</li>
+        </ul>
+        <p style="margin-top: 30px; font-size: 0.9em; color: #888;">
+            (This index.html file ensures the root branch has an entry point, but the actual app lives on the gh-pages branch.)
+        </p>
+    </div>
+</body>
+</html>

@@ -11,15 +11,13 @@ export function TelemetryLab({ state, onEventSent }: { state: SafariState; onEve
   const pushTelemetry = async () => {
     setTelemetryStatus("Sending payload...");
     try {
-      await fetch("/api/telemetry", {
-        method: "POST",
-        body: JSON.stringify({
-          kind: telemetryKind,
-          sourceId: "web-console",
-          vehicleId: targetVehicleId,
-          zoneId: targetZoneId,
-          message: telemetryMessage,
-        }),
+      const { ingestTelemetry } = await import("@/lib/demo-store");
+      ingestTelemetry({
+        kind: telemetryKind,
+        sourceId: "web-console",
+        vehicleId: targetVehicleId,
+        zoneId: targetZoneId,
+        message: telemetryMessage,
       });
       setTelemetryStatus("Event injected successfully.");
       onEventSent();
@@ -89,7 +87,7 @@ export function TelemetryLab({ state, onEventSent }: { state: SafariState; onEve
           onClick={() => void pushTelemetry()}
           className="w-full rounded-full border border-white/20 bg-white/5 px-5 py-3 text-sm font-medium transition hover:bg-white/10"
         >
-          Send payload to `/api/telemetry`
+          Send payload locally
         </button>
         <p className="text-center text-sm text-amber-200/80">{telemetryStatus}</p>
       </div>

@@ -22,14 +22,12 @@ export function BookingForm({
     }
     setBookingMessage("Issuing secure pass...");
     try {
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        body: JSON.stringify({ visitorName, slotId, ticketCount }),
-      });
-      const data = (await response.json()) as { booking: Booking };
-      setHighlightedBooking(data.booking);
-      onBookingCreated(data.booking);
-      setBookingMessage(`Pass ${data.booking.id} confirmed.`);
+      // Direct call instead of fetch for static export
+      const { createBooking } = await import("@/lib/demo-store");
+      const newBooking = createBooking({ visitorName, slotId, ticketCount });
+      setHighlightedBooking(newBooking);
+      onBookingCreated(newBooking);
+      setBookingMessage(`Pass ${newBooking.id} confirmed.`);
       setVisitorName("");
     } catch (err) {
       setBookingMessage("Protocol failure. Retry.");
